@@ -1,0 +1,49 @@
+# Instructions: Write an interest calculator that accepts an:
+
+# P - initial deposit sum
+# r - interest rate (annual)
+# o - optional yearly additional contribution
+# t - number of years
+
+# to calculate and returns the:
+# Total balance
+# Total contribution
+# Total interest
+
+global d_Interest
+d_Interest = 0.0
+global p_Interest
+p_Interest = 0.0
+global Total_Deposit
+Total_Deposit = 0
+global Total_Principle
+Total_Principle = 0
+global Total
+Total = 0
+
+def Ribit_Daribit(P, r, t):
+    global p_Interest
+    Amount = P * (pow((1+(r)), t))
+    p_Interest = Amount- P
+    return Amount
+
+def deposits(d,r,n,t):
+    for period in range(int(t)):
+        amount = d * (pow((1 + r / n), n * (period + 1)))
+        global Total, d_Interest
+        Total = Total + amount
+        d_Interest = d_Interest + (amount - d)
+    return Total
+
+def user_prompts():
+    priciple = int(input('Enter Deposit Sum: '))
+    rate = (float(input("Enter Interest rate in %: ")))/100
+    deposit = int(input("Optional yearly additional contribution: "))
+    years = float(input("Number of years: "))
+    Total_Principle=Ribit_Daribit(priciple, rate, years)
+    Total_Deposit=(deposits(deposit, rate,1, years))
+    print("Total Balance: ", Total_Principle+Total_Deposit)
+    print("Total Contribution: ", (Total_Principle+Total_Deposit)-(d_Interest+p_Interest))
+    print("Total Interest is: ", d_Interest+p_Interest)
+
+user_prompts()
