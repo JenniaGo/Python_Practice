@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ticket-submitter
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ticket-submitter
+  template:
+    metadata:
+      labels:
+        app: ticket-submitter
+    spec:
+      containers:
+      - name: ticket-submitter
+        image: my-registry/ticket-submitter:latest
+        ports:
+        - containerPort: 5000
